@@ -22,7 +22,7 @@ pipeline {
                 nexusArtifactUploader artifacts: 
                     [[artifactId: 'proj3', 
                       classifier: '', 
-                      file: 'project/target/project-1.0-RAMA.war', 
+                      file: 'project-1.0-RAMA.war', 
                       type: 'war'
                      ]], 
                       credentialsId: 'nexus3', 
