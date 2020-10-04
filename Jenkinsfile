@@ -23,7 +23,7 @@ pipeline {
                 script {
                 pom = readMavenPom file: 'pom.xml';
                 echo 'Saca nombre artefacto....';
-                echo ${pom.artifactId};    
+                echo '${pom.artifactId}';    
                 echo '${pom.version}'; 
                 echo '${pom.packaging}';
                     
