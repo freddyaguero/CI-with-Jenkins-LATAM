@@ -30,7 +30,7 @@ pipeline {
                 nexusArtifactUploader artifacts: 
                     [[artifactId: 'proj3', 
                       classifier: '', 
-                      file: "target/${pom.name}-${pom.version}.war", 
+                      file: "project/target/${pom.name}-${pom.version}.war", 
                       type: 'war'
                      ]], 
                       credentialsId: 'nexus3', 
