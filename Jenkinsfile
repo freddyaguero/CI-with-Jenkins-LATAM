@@ -23,6 +23,8 @@ pipeline {
                 script {
                 pom = readMavenPom file: 'pom.xml';
                 echo 'Saca nombre artefacto....';
+                filesByGlob = findFiles(glob: "target/*.war");
+                echo filesByGlob;    
                 echo '${pom.artifactId}';    
                 echo '${pom.version}'; 
                 echo '${pom.packaging}';
