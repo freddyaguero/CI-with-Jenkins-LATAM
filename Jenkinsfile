@@ -19,19 +19,27 @@ pipeline {
         }
         stage('Upload war to nexus') {
             steps {
-                nexusArtifactUploader artifacts: 
-                    [[artifactId: 'proj3', 
-                      classifier: '', 
-                      file: 'project-1.0-RAMA.war', 
-                      type: 'war'
-                     ]], 
-                      credentialsId: 'nexus3', 
-                    groupId: 'ci.jenkins.aws', 
-                    nexusUrl: '34.95.251.107:8081', 
-                    nexusVersion: 'nexus3', 
-                    protocol: 'http', 
-                    repository: 'CIwithJenkinsLATAM', 
-                    version: '1.0.0'
+                script{
+                    pom = readMavenPom file: "pom.xml";
+                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                    echo "${filesByGlob}";
+                    artifactPath = filesByGlob[0].path;
+                    echo "artifactPath: ${artifactPath}";
+                    
+                nexusArtifactUploader artifacts: [
+                                                    [artifactId: pom.artifactId,
+                                                     classifier: '',
+                                                     file: artifactPath,
+                                                     type: pom.packaging]
+                                                 ], 
+                                    credentialsId: 'nexus3', 
+                                    groupId: pom.groupId, 
+                                    nexusUrl: '34.95.251.107:8081', 
+                                    nexusVersion: 'nexus3', 
+                                    protocol: 'http', 
+                                    repository: 'CIwithJenkinsLATAM', 
+                                    version: pom.version
+                }    
             }
         }
        
