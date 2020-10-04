@@ -20,6 +20,7 @@ pipeline {
   
         stage('Upload war to nexus') {
             steps {
+                script {
                 pom = readMavenPom file: 'pom.xml';
                 echo 'Saca nombre artefacto....';
                 echo '${pom.artifactId}';    
@@ -38,6 +39,7 @@ pipeline {
                     protocol: 'http', 
                     repository: 'CIwithJenkinsLATAM', 
                     version: '1.0-RAMA'
+                }    
                   
             }
         }
