@@ -17,6 +17,9 @@ pipeline {
                 echo 'Desplegando proyecto....'
             }
         }
+        tools{
+            maven "Maven 3.6.0"
+        }    
         stage('Upload war to nexus') {
             steps {
                 script{
