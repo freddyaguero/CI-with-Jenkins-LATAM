@@ -20,11 +20,15 @@ pipeline {
   
         stage('Upload war to nexus') {
             steps {
-                                   
+                def pom = readMavenPom file: 'pom.xml';
+                echo 'Saca nombre artefacto....';
+                echo '${pom.artifactId}';    
+                echo '${pom.version}'; 
+                echo '${pom.packaging}';
                 nexusArtifactUploader artifacts: 
                     [[artifactId: 'proj3', 
                       classifier: '', 
-                      file: 'project/target/project-1.0-RAMA.war', 
+                      file: "target/${pom.artifactId}-${pom.version}.${pom.packaging}", 
                       type: 'war'
                      ]], 
                       credentialsId: 'nexus3', 
