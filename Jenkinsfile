@@ -28,13 +28,23 @@ pipeline {
       }
      }
  
-     stage('Build Docker Image') {
-      steps {
-       echo "Build Docker Image.."
-         script {
-            withCredentials([usernamePassword(credentialsId: 'docker-login-creds', passwordVariable: 'password', usernameVariable: 'username')]) {
-            echo "${password} | docker login -u ${username} --password-stdin"
-            sh "docker build -t rabemo/cheers2019:${env.BUILD_ID} ."
+   stage('Build and push Docker Image') {
+      steps{
+        echo "Build Docker Image.."
+        script {
+           appimage = docker.build( "devopsfreddy/devops:${env.BUILD_ID}")          
+           docker.withRegistry("https://registry.hub.docker.com",'docker-login-creds')          
+         }
+       }
+      }
+  
+  //   stage('Build Docker Image') {
+  //    steps {
+  //     echo "Build Docker Image.."
+  //      script {
+  //          withCredentials([usernamePassword(credentialsId: 'docker-login-creds', passwordVariable: 'password', usernameVariable: 'username')]) {
+  //          echo "${password} | docker login -u ${username} --password-stdin"
+  //          sh "docker build -t rabemo/cheers2019:${env.BUILD_ID} ."
            // def app = docker.build("rabemo/cheers2019:${env.BUILD_ID} .")
            // app.push("latest")
            }
