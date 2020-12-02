@@ -32,12 +32,12 @@ pipeline {
       steps{
         echo "Build Docker Image.."
         script {
-           appimage = docker.build( "devopsfreddy/devops:${env.BUILD_ID}")          
+           appimage = docker.build( "devopsfreddy/devops:${env.BUILD_ID} .")          
            docker.withRegistry("https://registry.hub.docker.com",'docker-login-creds')          
          }
        }
       }
-  
+ 
  
   //   stage('Build Docker Image') {
   //    steps {
