@@ -3,9 +3,11 @@ pipeline {
  agent any
  
  environment {
-    PROJECT_ID = "vaulted-quarter-260801"
+   // PROJECT_ID = "vaulted-quarter-260801"
+    PROJECT_ID = "devopsfreddy"
     CLUSTER_NAME = 'kube-demo'
-    LOCATION = 'us-central1-c'
+   // LOCATION = 'us-central1-c'
+    LOCATION = 'us-central1-a'
     CREDENTIALS_ID = 'JSON'
   }    
  stages {
